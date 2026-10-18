@@ -1,0 +1,35 @@
+# doi2pdf 配置文件示例
+#
+# 复制为 doi2pdf.toml 后按需修改。查找顺序：
+#   1. --config 指定的路径
+#   2. 环境变量 DOI2PDF_CONFIG
+#   3. 当前目录 ./doi2pdf.toml
+#   4. ~/.config/doi2pdf/doi2pdf.toml
+# 都不存在时使用程序内置默认值（与下方内容一致）。
+
+# ── Sci-Hub 镜像 ──
+# 按顺序尝试，直到成功或全部失败。镜像会失效或更换域名，
+# 失效时改这里即可，不需要改代码。
+#
+# 实测记录（2026-10，DOI 10.1021/ol200992c）:
+#   sci-hub.st    直连 16s 无 PDF 链接 / 走代理 403     → 已剔除
+#   sci-hub.shop  返回卖书页，无 PDF 链接               → 已剔除
+#   sci-hub.ee    直连 0.7s  ✓ 真 PDF 531KB             ← 最快
+#   sci-hub.al    直连 1.1s  ✓ 真 PDF 531KB
+#   sci-hub.ren   直连 1.6s  ✓ 真 PDF 531KB
+mirrors = [
+    "https://sci-hub.ee",
+    "https://sci-hub.al",
+    "https://sci-hub.ren",
+]
+
+# ── 超时（秒）──
+[timeouts]
+landing = 15   # 落地页请求超时
+pdf = 60       # PDF 文件下载超时
+
+# ── 请求设置 ──
+[request]
+# 只发这一条 User-Agent。Sci-Hub 前有 DDoS-Guard，
+# 补齐 Sec-Ch-Ua 等浏览器特征头反而更容易被拦截，不要随意改动。
+user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
