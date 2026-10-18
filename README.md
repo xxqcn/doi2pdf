@@ -1,6 +1,6 @@
 # doi2pdf
 
-按 DOI 从 Sci-Hub 下载论文 PDF。只做这一件事：不抓元数据、不转 Markdown、不写数据库。
+按 DOI 从 Sci-Hub 下载论文 PDF。只做下载论文这一件事。
 
 ## 安装
 
